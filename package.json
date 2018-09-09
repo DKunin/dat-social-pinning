@@ -20,6 +20,7 @@
   "keywords": [],
   "license": "MIT",
   "dependencies": {
+    "body-parser": "1.18.3",
     "dat-deamon": "0.0.2",
     "dat-link-resolve": "2.2.0",
     "dat-node": "3.5.13",

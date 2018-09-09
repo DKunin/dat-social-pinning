@@ -6,6 +6,10 @@ const datNode = require('dat-node');
 const datDeamon = require('dat-deamon');
 const datResolve = require('dat-link-resolve');
 const DATA_FILE = './data/data.json';
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 let datKey;
 
 datDeamon
@@ -52,39 +56,20 @@ fs.readFile(DATA_FILE, function(err, data) {
     currentFile.forEach(pinDat);
 });
 
-const server = http.createServer(function(req, res) {
-    if (req.method == 'POST') {
-        var body = '';
-        req.on('data', function(data) {
-            body += data;
-        });
-        req.on('end', function() {
-            const { link } = JSON.parse(body);
-            datResolve(link, function(err, key) {
-                if (key) {
-                    appendToFile(key);
-                }
-            });
-        });
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ result: 'ok' }));
-    } else {
-        console.log('GET');
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        fs.readFile(DATA_FILE, function(err, data) {
-            res.end(data.toString());
-        });
-    }
+app.get('/', (req, res) => {
+    fs.readFile(DATA_FILE, function(err, data) {
+        res.json(JSON.parse(data.toString()));
+    });
 });
 
-const port = 3000;
-const host = '127.0.0.1';
-server.listen(port, host);
-const express = require('express')
-const app = express()
+app.post('/', (req, res) => {
+    const { link } = req.body;
+    datResolve(link, function(err, key) {
+        if (key) {
+            appendToFile(key);
+        }
+    });
+    res.json({ link });
+});
 
-app.get('/', (req, res) => res.send('Hello World!'))
-
-app.listen(3002, () => console.log('Example app listening on port 3000!'))
-
-console.log('Listening at http://' + host + ':' + port);
+app.listen(3002);
