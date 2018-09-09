@@ -22,6 +22,7 @@
   "dependencies": {
     "dat-deamon": "0.0.2",
     "dat-link-resolve": "2.2.0",
-    "dat-node": "3.5.13"
+    "dat-node": "3.5.13",
+    "express": "4.16.3"
   }
 }

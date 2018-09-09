@@ -80,4 +80,11 @@ const server = http.createServer(function(req, res) {
 const port = 3000;
 const host = '127.0.0.1';
 server.listen(port, host);
+const express = require('express')
+const app = express()
+
+app.get('/', (req, res) => res.send('Hello World!'))
+
+app.listen(3002, () => console.log('Example app listening on port 3000!'))
+
 console.log('Listening at http://' + host + ':' + port);
