@@ -1,0 +1,27 @@
+{
+  "name": "dat-social-pinning",
+  "version": "0.0.1",
+  "private": false,
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dkunin/dat-social-pinning.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dkunin/dat-social-pinning/issues"
+  },
+  "scripts": {
+    "test": "echo test",
+    "start": "node ./",
+    "dev": "node ./",
+    "build": "NODE_ENV=production node ./"
+  },
+  "homepage": "https://github.com/dkunin/dat-social-pinning",
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {
+    "dat-deamon": "0.0.2",
+    "dat-link-resolve": "2.2.0",
+    "dat-node": "3.5.13"
+  }
+}
