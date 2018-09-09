@@ -47,10 +47,9 @@ function appendToFile(datKey) {
     });
 }
 
-
 fs.readFile(DATA_FILE, function(err, data) {
     let currentFile = JSON.parse(data.toString());
-    currentFile.forEach(pinDat)
+    currentFile.forEach(pinDat);
 });
 
 const server = http.createServer(function(req, res) {
@@ -72,7 +71,9 @@ const server = http.createServer(function(req, res) {
     } else {
         console.log('GET');
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ datKey }));
+        fs.readFile(DATA_FILE, function(err, data) {
+            res.end(data.toString());
+        });
     }
 });
 
