@@ -57,13 +57,13 @@ fs.readFile(DATA_FILE, function(err, data) {
     currentFile.forEach(pinDat);
 });
 
-app.get('/', cors(), (req, res) => {
+app.get('/links', cors(), (req, res) => {
     fs.readFile(DATA_FILE, function(err, data) {
         res.json(JSON.parse(data.toString()));
     });
 });
 
-app.post('/', cors(), (req, res) => {
+app.post('/newlink', cors(), (req, res) => {
     const { link } = req.body;
     datResolve(link, function(err, key) {
         if (key) {
