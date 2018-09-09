@@ -7,6 +7,7 @@ const datDeamon = require('dat-deamon');
 const datResolve = require('dat-link-resolve');
 const DATA_FILE = './data/data.json';
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -56,13 +57,13 @@ fs.readFile(DATA_FILE, function(err, data) {
     currentFile.forEach(pinDat);
 });
 
-app.get('/', (req, res) => {
+app.get('/', cors(), (req, res) => {
     fs.readFile(DATA_FILE, function(err, data) {
         res.json(JSON.parse(data.toString()));
     });
 });
 
-app.post('/', (req, res) => {
+app.post('/', cors(), (req, res) => {
     const { link } = req.body;
     datResolve(link, function(err, key) {
         if (key) {
